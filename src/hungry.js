@@ -11,24 +11,25 @@ firebase.initializeApp(config);
 
 var $table = $(".js-restaurants");
 
-function addRow(data) {
-  var attrs             = data.val()
-  var restaurantName    = attrs.name;
-  var restaurantCity    = attrs.city;
-  var restaurantCountry = attrs.country;
-  var status            = attrs.status;
-  var totalYears        = attrs.total_years;
-  var website           = attrs.website;
+function addRow(rankData, restaurantData) {
+  var rankAttrs         = rankData.val();
+  var restaurantAttrs   = restaurantData.val();
+  var rank              = rankAttrs.rank;
+  var restaurantName    = restaurantAttrs.name;
+  var restaurantCity    = restaurantAttrs.city;
+  var restaurantCountry = restaurantAttrs.country;
+  var status            = restaurantAttrs.status;
+  var totalYears        = restaurantAttrs.total_years;
+  var website           = restaurantAttrs.website;
 
   var content = $([
     "<tr>",
-    "  <td>" + (parseInt(data.key)+1) + "</td>",
-    "  <td>" + restaurantName + "</td>",
+    "  <td>" + rank + "</td>",
+    "  <td>" + "<a href='" + website + "' target=blank>" + restaurantName + "</a>"+ "</td>",
     "  <td>" + restaurantCity + "</td>",
     "  <td>" + restaurantCountry + "</td>",
     "  <td>" + status + "</td>",
     "  <td>" + totalYears + "</td>",
-    "  <td>" + website + "</td>",
     "</tr>"
   ].join("\n"));
 
@@ -40,20 +41,33 @@ var restaurantRef = database.ref("restaurants");
 var rankRef       = database.ref("ranks");
 
 function addRowsForYear(year) {
-  rankRef.orderByChild("year").equalTo(year).on('child_added', function(rankData) {
-    restaurantRef.orderByChild("id").equalTo(rankData.val().restaurant_id).on('child_added', function(restaurantData) {
-      addRow(restaurantData);
-    });
+  // Filter by Year
+  rankRef.orderByChild("rank").on('child_added', function(rankData) {
+    var data = rankData.val()
+    if (data.year == year) {
+      // TODO: Inefficient
+      firebase.database().ref('/restaurants/' + (data.restaurant_id-1)).once('value').then(function(restaurantData) {
+        addRow(rankData, restaurantData);
+      });
+    }
   });
 }
 
-
-
 addRowsForYear(2016);
 
+// TODO: fast sliding creates multiples
+var changeListByYear = function(slideData) {
+  var currentYear = parseInt($(".js-current-year").text())
+  var year = slideData.value;
+  if (year !== currentYear) {
+    $table.empty();
+    $(".js-current-year").text(year);
+    addRowsForYear(year);
+  }
+}
 
 $('#ex1').slider({
   formatter: function(value) {
     return 'Current value: ' + value;
   }
-});
+}).on('slide', changeListByYear);

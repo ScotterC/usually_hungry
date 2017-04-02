@@ -18,4 +18,4 @@ export AWS_SECRET_ACCESS_KEY=SECRET_KEY
 * Filters
 * Sorting
 * About Page
-* Restrict Firebase permissions
+* slider for different years
