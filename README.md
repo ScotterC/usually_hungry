@@ -2,13 +2,11 @@
 
 ## Usage
 
-### Deployment
+```
+yarn add global firebase
+```
 
-Requires S3 Credentials
-```
-export AWS_ACCESS_KEY_ID=ACCESS_KEY
-export AWS_SECRET_ACCESS_KEY=SECRET_KEY
-```
+### Deployment
 
 `make deploy`
 

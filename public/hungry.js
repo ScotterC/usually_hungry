@@ -1,4 +1,3 @@
-// Initialize Firebase
 var config = {
   apiKey: "AIzaSyAjuulCONwPwcOKrnAuKi4SP5BNrDIGcSA",
   authDomain: "usuallyhungry-d037e.firebaseapp.com",
@@ -9,7 +8,13 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var $table = $(".js-restaurants");
+var $table       = $(".js-restaurants");
+var FIRST_YEAR   = 2002
+var CURRENT_YEAR = 2016
+
+$(".js-first-year").text(FIRST_YEAR);
+$(".js-current-year").text(CURRENT_YEAR);
+
 
 function addRow(rankData, restaurantData) {
   var rankAttrs         = rankData.val();
@@ -24,12 +29,11 @@ function addRow(rankData, restaurantData) {
 
   var content = $([
     "<tr>",
-    "  <td>" + rank + "</td>",
-    "  <td>" + "<a href='" + website + "' target=blank>" + restaurantName + "</a>"+ "</td>",
-    "  <td>" + restaurantCity + "</td>",
-    "  <td>" + restaurantCountry + "</td>",
-    "  <td>" + status + "</td>",
-    "  <td>" + totalYears + "</td>",
+    "  <td><p class='text-center'> #" + rank + "</p></td>",
+    "  <td><p>" + restaurantName + "</p> <a href='" + website + "' target=blank>" + website + "</a> // " + status + "</td>",
+    "  <td>" + restaurantCity + ", " + restaurantCountry + "</td>",
+    "  <td>" + totalYears + " Years" + "</td>", // TODO: pluralize year/years
+    "  <td><span class='glyphicon glyphicon-arrow-up' aria-hidden='true'></span></td>",
     "</tr>"
   ].join("\n"));
 
@@ -55,19 +59,24 @@ function addRowsForYear(year) {
 
 addRowsForYear(2016);
 
-// TODO: fast sliding creates multiples
 var changeListByYear = function(slideData) {
-  var currentYear = parseInt($(".js-current-year").text())
-  var year = slideData.value;
+  var currentYear = slideData.value.oldValue
+  var year        = slideData.value.newValue
+
+  // TODO: Need to find a way to ensure this executes only once
+  // Maybe: If executed for this year. Don't run again
   if (year !== currentYear) {
     $table.empty();
-    $(".js-current-year").text(year);
     addRowsForYear(year);
   }
 }
 
-$('#ex1').slider({
-  formatter: function(value) {
-    return 'Current value: ' + value;
-  }
-}).on('slide', changeListByYear);
+$('#year-slider').slider({
+  reversed: true,
+  min: FIRST_YEAR,
+  max: CURRENT_YEAR,
+  step: 1,
+  value: CURRENT_YEAR,
+  tooltip: 'show',
+  handle: 'square'
+}).on('change', changeListByYear);

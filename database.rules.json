@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": "auth != null",
+    "ranks": {
+      ".indexOn": "year"
+    },
+    "restaurants": {
+      ".indexOn": "id"
+    }
+  }
+}
