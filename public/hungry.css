@@ -1,10 +1,26 @@
 body {
-
+font-family: "PT Sans";
+background-color: #eee9e1;
 }
 
 .superset {
-  font-size: 18px;
+  font-size: 20px;
   vertical-align: top;
+}
+
+.navbar h1 {
+  color: white;
+  font-weight: 700;
+  font-size: 46px;
+
+}
+
+.navbar a:hover {
+  text-decoration: none;
+}
+.navbar-custom {
+  background-color: rgb(44, 177, 153);
+  border-color: rgb(44, 177, 153);
 }
 
 .slider.slider-horizontal .slider-handle {
