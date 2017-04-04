@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "firebase-tools": "^3.5.0",
     "global": "^4.3.1",
     "googleapis": "^18.0.0",
     "request": "^2.81.0",

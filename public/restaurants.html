@@ -10,22 +10,32 @@
   <body>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <a href="index.html">
-          <h1 class='text-center'>
-            <span class='superset'>I'M</span> USUALLY HUNGRY
-          </h1>
-        </a>
+        <h1 class='text-center'>
+          <span class='superset'>I'M</span> USUALLY HUNGRY
+        </h1>
       </div>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="infogram-embed" data-id="welcome_your_first_project-25788" data-type="interactive" data-title="Top 50 Restaurants Stats"></div>
-        <script>
-          !function(e,t,s,i){var n="InfogramEmbeds",o=e.getElementsByTagName("script"),d=o[0],r=/^http:/.test(e.location)?"http:":"https:";if(/^\/{2}/.test(i)&&(i=r+i),window[n]&&window[n].initialized)window[n].process&&window[n].process();else if(!e.getElementById(s)){var a=e.createElement("script");a.async=1,a.id=s,a.src=i,d.parentNode.insertBefore(a,d)}}(document,0,"infogram-async","//e.infogr.am/js/dist/embed-loader-min.js");
-        </script>
-        <div style="padding:8px 0;font-family:Arial!important;font-size:13px!important;line-height:15px!important;text-align:center;border-top:1px solid #dadada;margin:0 30px">
+        <div class="col-sm-6 col-md-6">
+          <div class="row">
+            <div class="col-md-4">
+              <span class='js-current-year'></span>
+              <input id="year-slider" type="text" />
+              <span class='js-first-year'></span>
+            </div>
+          </div>
         </div>
+<!--         <div class="col-sm-6 col-md-6">
+          <div class="row">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </div> -->
       </div>
+      <table class="table">
+        <tbody class="js-restaurants"></tbody>
+      </table>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-app.js"></script>
