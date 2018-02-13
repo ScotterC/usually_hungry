@@ -1,3 +1,5 @@
+# Falling back on autodetect for now
+
 # version: 2
 # jobs:
 #   build:
