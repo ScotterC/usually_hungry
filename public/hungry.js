@@ -1,10 +1,10 @@
 var config = {
-  apiKey: "AIzaSyAjuulCONwPwcOKrnAuKi4SP5BNrDIGcSA",
-  authDomain: "usuallyhungry-d037e.firebaseapp.com",
-  databaseURL: "https://usuallyhungry-d037e.firebaseio.com",
-  projectId: "usuallyhungry-d037e",
-  storageBucket: "usuallyhungry-d037e.appspot.com",
-  messagingSenderId: "827227044917"
+  apiKey: "AIzaSyDAzTPgI7C8G9C9xlj-0ZT6X8g690j-MWg",
+  authDomain: "usually-hungry.firebaseapp.com",
+  databaseURL: "https://usually-hungry.firebaseio.com",
+  projectId: "usually-hungry",
+  storageBucket: "",
+  messagingSenderId: "354403057524"
 };
 firebase.initializeApp(config);
 
