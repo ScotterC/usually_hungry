@@ -22,4 +22,4 @@ test:
 
 production:
   <<: *default
-  database: usually_hungry_production
+  url: <%= ENV["DATABASE_URL"] %>
