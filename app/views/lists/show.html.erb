@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @list.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @list.description %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @list.owner.email %>
+</p>
+
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', lists_path %> |
+<%= link_to "Create List Items", new_list_list_item_path(@list) %>
+
+<h2>List Items</h2>
+
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <% @list.items.each_with_index do |item, idx| %>
+      <tr>
+        <td><%= idx + 1 %></td>
+        <td><%= item.name %></td>
+        <td><%= item.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

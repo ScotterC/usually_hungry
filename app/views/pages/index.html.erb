@@ -1,1 +1,20 @@
 <h1>Hello World</h1>
+
+<table class="table">
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @lists.each_with_index do |list, idx| %>
+      <tr>
+        <td><%= idx + 1 %></td>
+        <td><%= list.name %></td>
+        <td>
+          <%= link_to "View", list_path(list) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
