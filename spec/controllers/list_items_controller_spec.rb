@@ -24,7 +24,9 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ListItemsController, type: :controller do
-
+  before :each do
+    @list = create(:list)
+  end
   # This should return the minimal set of attributes required to create a valid
   # ListItem. As you add validations to ListItem, be sure to
   # adjust the attributes here as well.
@@ -59,7 +61,7 @@ RSpec.describe ListItemsController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: {list_id: @list.id}, session: valid_session
       expect(response).to be_success
     end
   end

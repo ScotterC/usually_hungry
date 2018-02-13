@@ -2,16 +2,16 @@ class ListItemsController < ApplicationController
   before_action :set_list
   before_action :set_list_item, only: [:show, :edit, :update, :destroy]
 
-  # GET /list_items
+  # GET /list/1/items
   def index
     @list_items = ListItem.all
   end
 
-  # GET /list_items/1
+  # GET /list/1/items/1
   def show
   end
 
-  # GET /list_items/new
+  # GET /list/1/items/new
   def new
     @list_item = ListItem.new
   end
@@ -35,7 +35,7 @@ class ListItemsController < ApplicationController
   # PATCH/PUT /list_items/1
   def update
     if @list_item.update(list_item_params)
-      redirect_to @list_item, notice: 'List item was successfully updated.'
+      redirect_to [@list, @list_item], notice: 'List item was successfully updated.'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class ListItemsController < ApplicationController
   # DELETE /list_items/1
   def destroy
     @list_item.destroy
-    redirect_to list_items_url, notice: 'List item was successfully destroyed.'
+    redirect_to list_list_items_url(@list), notice: 'List item was successfully destroyed.'
   end
 
   private

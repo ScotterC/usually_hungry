@@ -21,6 +21,8 @@ module UsuallyHungry
       g.jbuilder          false
       g.javascripts       false
       g.stylesheets       false
+      g.view_specs        false
+      g.helper_specs      false
     end
   end
 end
