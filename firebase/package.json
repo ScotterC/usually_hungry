@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "firebase": "^4.9.1",
+    "firebase-tools": "^3.17.4",
+    "global": "^4.3.2",
+    "googleapis": "^18.0.0",
+    "request": "^2.81.0",
+    "s3-website": "^3.0.1"
+  }
+}
