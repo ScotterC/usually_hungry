@@ -27,13 +27,9 @@ Reach
 
 
 TODO
-
-- Testing: Move to Rspec
-- DB: Move to Postgres
-- Add Bootstrap for easy visuals
-- Basic deployment. Heroku?
 - Models
   - Users
   - Lists
   - ListItems
   - Event (acting on a list item)
+- Create a Countries list

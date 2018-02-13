@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
 
-  def index; end
+  def index
+    @lists = List.all
+  end
 end
