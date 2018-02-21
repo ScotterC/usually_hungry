@@ -1,19 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col">
+    <h1>
+      <%= @item.name %>
+      <div class="float-right">
+        <%= link_to 'Edit', edit_list_item_path(@list, @item), class: 'btn btn-outline-info' %>
+      </div>
+    </h1>
 
-<p>
-  <strong>List:</strong>
-  <%= @list_item.list_id %>
-</p>
+    <p>
+      <%= @list.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list_item.name %>
-</p>
+    <p>
+      <%= @item.description %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @list_item.description %>
-</p>
-
-<%= link_to 'Edit', edit_list_list_item_path(@list, @list_item) %> |
-<%= link_to 'Back', list_list_items_path(@list) %>
+    <%= link_to 'Back', list_path(@list), class: 'btn btn-outline-info' %>
+  </div>
+</div>
