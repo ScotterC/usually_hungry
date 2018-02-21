@@ -28,7 +28,6 @@ Reach
 
 TODO
 - Models
-  - Users
   - Lists
   - ListItems
   - Event (acting on a list item)

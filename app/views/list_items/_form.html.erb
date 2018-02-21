@@ -1,5 +1,8 @@
-<%= form_with(model: [@list, list_item], local: true) do |form| %>
-  <%= render 'shared/form_error', target: list_item %>
+<%
+  form_path = item.new_record? ? list_items_path : list_item_path(@list, item)
+%>
+<%= form_with(model: [@list, item], url: form_path) do |form| %>
+  <%= render 'shared/form_error', target: item %>
 
   <%= form.hidden_field :list_id, value: @list.id %>
 
@@ -13,5 +16,8 @@
     <%= form.text_area :description, class: 'form-control' %>
   </div>
 
-  <%= form.submit "Create", class: "btn btn-primary" %>
+  <div class="float-right">
+    <% btn_txt = item.new_record? ? "Create" : "Update" %>
+    <%= form.submit btn_txt, class: "btn btn-primary" %>
+  </div>
 <% end %>

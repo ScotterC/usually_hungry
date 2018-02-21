@@ -1,6 +1,9 @@
-<h1>Editing List Item</h1>
+<div class="row">
+  <div class="col">
+    <h1>Editing Item</h1>
 
-<%= render 'form', list_item: @list_item %>
+    <%= render 'form', item: @item %>
 
-<%= link_to 'Show', [@list, @list_item] %> |
-<%= link_to 'Back', list_list_items_path(@list) %>
+    <%= link_to 'Cancel', list_path(@list), class: 'btn btn-outline-info' %>
+  </div>
+</div>

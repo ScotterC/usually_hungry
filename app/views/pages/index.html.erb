@@ -1,10 +1,15 @@
-<h1>Hello World</h1>
+<h1>
+  Popular Bucket Lists
+  <div class="float-right">
+    <%= link_to 'Create A List', new_list_path, class: 'btn btn-outline-info' %>
+  </div>
+</h1>
 
 <table class="table">
   <thead>
     <th>#</th>
     <th>Name</th>
-    <th></th>
+    <th colspan="2"></th>
   </thead>
   <tbody>
     <% @lists.each_with_index do |list, idx| %>
@@ -12,7 +17,10 @@
         <td><%= idx + 1 %></td>
         <td><%= list.name %></td>
         <td>
-          <%= link_to "View", list_path(list) %>
+          <%= link_to "View", list_path(list), class: 'btn btn-link' %>
+        </td>
+        <td>
+          <%= link_to "Subscribe", "#", class: 'btn btn-primary' %>
         </td>
       </tr>
     <% end %>

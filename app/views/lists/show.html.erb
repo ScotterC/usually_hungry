@@ -1,39 +1,52 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col">
+    <h1>
+      <%= @list.name %>
+      <div class="float-right">
+        <%= link_to 'Edit', edit_list_path(@list), class: 'btn btn-outline-info' %>
+      </div>
+    </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+    <%= @list.description %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @list.description %>
-</p>
+    <p>
+      <strong>Owner:</strong>
+      <%= @list.owner.email %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h2>
+      List Items
+      <div class="float-right">
+        <%= link_to "Create", new_list_item_path(@list), class: 'btn btn-outline-info' %>
+      </div>
+    </h2>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @list.owner.email %>
-</p>
-
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %> |
-<%= link_to "Create List Items", new_list_list_item_path(@list) %>
-
-<h2>List Items</h2>
-
-<table class="table">
-  <thead>
-    <th>#</th>
-    <th>Name</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    <% @list.items.each_with_index do |item, idx| %>
-      <tr>
-        <td><%= idx + 1 %></td>
-        <td><%= item.name %></td>
-        <td><%= item.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <table class="table">
+      <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th colspan="2"></th>
+      </thead>
+      <tbody>
+        <% @list.items.each_with_index do |item, idx| %>
+          <tr>
+            <td><%= idx + 1 %></td>
+            <td><%= item.name %></td>
+            <td><%= item.description %></td>
+            <td><%= link_to 'Show', list_item_path(@list, item) %></td>
+            <td><%= link_to 'Edit', edit_list_item_path(@list, item) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <%= link_to 'Back', lists_path, class: 'btn btn-outline-info' %>
+  </div>
+</div>

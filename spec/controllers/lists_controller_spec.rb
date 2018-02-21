@@ -29,11 +29,17 @@ RSpec.describe ListsController, type: :controller do
   # List. As you add validations to List, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Foo Bar",
+      owner_id: create(:user).id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil,
+      owner_id: nil
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -45,7 +51,7 @@ RSpec.describe ListsController, type: :controller do
     it "returns a success response" do
       list = List.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -53,14 +59,14 @@ RSpec.describe ListsController, type: :controller do
     it "returns a success response" do
       list = List.create! valid_attributes
       get :show, params: {id: list.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -68,7 +74,7 @@ RSpec.describe ListsController, type: :controller do
     it "returns a success response" do
       list = List.create! valid_attributes
       get :edit, params: {id: list.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -89,7 +95,7 @@ RSpec.describe ListsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {list: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -97,14 +103,16 @@ RSpec.describe ListsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Updated Name"
+        }
       }
 
       it "updates the requested list" do
         list = List.create! valid_attributes
         put :update, params: {id: list.to_param, list: new_attributes}, session: valid_session
         list.reload
-        skip("Add assertions for updated state")
+        expect(list.name).to be == "Updated Name"
       end
 
       it "redirects to the list" do
@@ -118,7 +126,7 @@ RSpec.describe ListsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         list = List.create! valid_attributes
         put :update, params: {id: list.to_param, list: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

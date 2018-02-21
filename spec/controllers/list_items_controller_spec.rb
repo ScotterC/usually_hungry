@@ -31,11 +31,17 @@ RSpec.describe ListItemsController, type: :controller do
   # ListItem. As you add validations to ListItem, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: "Foo Bar",
+      list_id: @list.id
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: nil,
+      list_id: nil
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -43,34 +49,26 @@ RSpec.describe ListItemsController, type: :controller do
   # ListItemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      list_item = ListItem.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #show" do
     it "returns a success response" do
       list_item = ListItem.create! valid_attributes
-      get :show, params: {id: list_item.to_param}, session: valid_session
-      expect(response).to be_success
+      get :show, params: {list_id: @list.id, id: list_item.to_param}, session: valid_session
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {list_id: @list.id}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #edit" do
     it "returns a success response" do
       list_item = ListItem.create! valid_attributes
-      get :edit, params: {id: list_item.to_param}, session: valid_session
-      expect(response).to be_success
+      get :edit, params: {list_id: @list.id, id: list_item.to_param}, session: valid_session
+      expect(response).to be_successful
     end
   end
 
@@ -78,20 +76,20 @@ RSpec.describe ListItemsController, type: :controller do
     context "with valid params" do
       it "creates a new ListItem" do
         expect {
-          post :create, params: {list_item: valid_attributes}, session: valid_session
+          post :create, params: {list_id: @list.id, list_item: valid_attributes}, session: valid_session
         }.to change(ListItem, :count).by(1)
       end
 
       it "redirects to the created list_item" do
-        post :create, params: {list_item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(ListItem.last)
+        post :create, params: {list_id: @list.id, list_item: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(@list)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {list_item: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        post :create, params: {list_id: @list.id, list_item: invalid_attributes}, session: valid_session
+        expect(response).to be_successful
       end
     end
   end
@@ -99,28 +97,30 @@ RSpec.describe ListItemsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: "Updated Name"
+        }
       }
 
       it "updates the requested list_item" do
         list_item = ListItem.create! valid_attributes
-        put :update, params: {id: list_item.to_param, list_item: new_attributes}, session: valid_session
+        put :update, params: {list_id: @list.id, id: list_item.to_param, list_item: new_attributes}, session: valid_session
         list_item.reload
-        skip("Add assertions for updated state")
+        expect(list_item.name).to be == "Updated Name"
       end
 
       it "redirects to the list_item" do
         list_item = ListItem.create! valid_attributes
-        put :update, params: {id: list_item.to_param, list_item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(list_item)
+        put :update, params: {list_id: @list.id, id: list_item.to_param, list_item: valid_attributes}, session: valid_session
+        expect(response).to redirect_to(@list)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         list_item = ListItem.create! valid_attributes
-        put :update, params: {id: list_item.to_param, list_item: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        put :update, params: {list_id: @list.id, id: list_item.to_param, list_item: invalid_attributes}, session: valid_session
+        expect(response).to be_successful
       end
     end
   end
@@ -129,14 +129,14 @@ RSpec.describe ListItemsController, type: :controller do
     it "destroys the requested list_item" do
       list_item = ListItem.create! valid_attributes
       expect {
-        delete :destroy, params: {id: list_item.to_param}, session: valid_session
+        delete :destroy, params: {list_id: @list.id, id: list_item.to_param}, session: valid_session
       }.to change(ListItem, :count).by(-1)
     end
 
     it "redirects to the list_items list" do
       list_item = ListItem.create! valid_attributes
-      delete :destroy, params: {id: list_item.to_param}, session: valid_session
-      expect(response).to redirect_to(list_items_url)
+      delete :destroy, params: {list_id: @list.id, id: list_item.to_param}, session: valid_session
+      expect(response).to redirect_to(list_url(@list))
     end
   end
 
